@@ -6,3 +6,9 @@ Thumbs.db
 .vscode/
 # LibreOffice locks
 .~lock.*#
+
+# Node / local validation output
+node_modules/
+coverage/
+.cache/
+dist/

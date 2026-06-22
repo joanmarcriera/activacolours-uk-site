@@ -1,0 +1,13 @@
+{
+  "name": "activacolours-uk-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static ActivaColours UK trade website for GitHub Pages.",
+  "scripts": {
+    "test": "node scripts/validate-site.mjs",
+    "validate": "node scripts/validate-site.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

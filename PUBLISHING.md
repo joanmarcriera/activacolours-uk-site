@@ -1,31 +1,51 @@
 # Publishing the ActivaColours UK site
 
-This folder is a self-contained static site and an initialised git repo (first commit
-made). It's ready to push to GitHub and host. Pushing needs **your** GitHub account —
-do it from this folder:
+This folder is a self-contained static site and Git repository. It is designed to
+be pushed as its own GitHub repository so the wider business project can remain
+private.
 
-## 1. Create the GitHub repo & push
+## 1. Create the GitHub repository
+
+From this folder:
+
 ```bash
-cd "ActivaColours-Project/05-Website/site"
-# create an empty repo on github.com first (e.g. activacolours-uk-site), then:
-git remote add origin https://github.com/<your-username>/activacolours-uk-site.git
+cd "/Users/marc/Documents/ActivaColours-Project/05-Website/site"
+git branch -M main
+gh repo create <owner-or-username>/activacolours-uk-site --private --source=. --push
+```
+
+Use `--public` instead of `--private` only when the site source is ready to be
+public.
+
+If the GitHub repository already exists:
+
+```bash
+git remote add origin https://github.com/<owner-or-username>/activacolours-uk-site.git
 git branch -M main
 git push -u origin main
 ```
 
-## 2. Host it (pick one — all free for static sites)
-- **GitHub Pages:** repo → Settings → Pages → Source: `Deploy from a branch` → `main` / `/ (root)`.
-  Live at `https://<username>.github.io/activacolours-uk-site/`.
-- **Cloudflare Pages / Netlify:** “Add site → import from Git”, build command: *none*,
-  publish directory: `/` (root). Gives a free subdomain; add a custom domain later.
+## 2. Enable GitHub Pages
 
-## 3. Before it's public — checklist
-- [ ] Point the contact form (`contact.html`, `action="#"`) at a backend (Formspree/Basin) or CRM.
-- [ ] Replace `hello@activacolours.uk` placeholder + add real company details and domain.
-- [ ] Swap in a hi-res / vector logo (and a proper 1200×630 OG share image).
-- [ ] Add Privacy, Cookie and T&Cs pages; cookie banner if you add analytics.
-- [ ] Final compliance read (no biocidal/health claims).
-- [ ] Custom domain (e.g. activacolours.uk) + HTTPS.
+In GitHub:
 
-> Tip: keep this as its own repo (just the `site/` contents) so the rest of the
-> business project stays private.
+1. Open the repository.
+2. Go to Settings -> Pages.
+3. Set Source to **GitHub Actions**.
+4. Push to `main`, or run the `Deploy GitHub Pages` workflow manually.
+
+The workflow in `.github/workflows/pages.yml` validates the static site, uploads
+the repository root as the Pages artifact and deploys it.
+
+## 3. Keep releases clean
+
+Before each push:
+
+```bash
+npm test
+git status --short
+```
+
+Before public launch, confirm the final enquiry email or replace the mailto form
+with a real CRM/form endpoint, add any required legal company details, configure
+the production domain and run the claim-compliance checker from the project root.
