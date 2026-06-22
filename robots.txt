@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://joanmarcriera.github.io/activacolours-uk-site/sitemap.xml
