@@ -472,6 +472,15 @@ table.spec td:first-child {
   font-size: 0.84rem;
 }
 
+.form-status {
+  margin: 4px 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.form-status:empty { display: none; }
+.form-status.is-ok { color: #1a7f4b; }
+.form-status.is-error { color: #b3261e; }
+
 /* Footer */
 footer {
   background:

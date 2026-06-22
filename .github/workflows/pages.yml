@@ -1,5 +1,8 @@
 name: Deploy GitHub Pages
 
+# Free GitHub Pages works because this repo is PUBLIC. Pages Source must be set to
+# "GitHub Actions" (Settings > Pages). If the repo is ever made private on a free
+# plan, Pages will stop working — deploy via the VPS Docker stack instead.
 on:
   push:
     branches:
