@@ -34,6 +34,7 @@
     if (button) button.disabled = true;
     setStatus("Sending your enquiry…", "info");
 
+    var ts = form.querySelector('[name="cf-turnstile-response"]');
     var payload = {
       name: form.name.value,
       company: form.company.value,
@@ -42,8 +43,15 @@
       type: form.type.value,
       interest: form.interest.value,
       msg: form.msg.value,
-      website: trap ? trap.value : ""
+      website: trap ? trap.value : "",
+      turnstileToken: ts ? ts.value : ""
     };
+
+    function fail(message) {
+      setStatus(message || ("Sorry — we couldn't send that just now. Please email us directly at " + CONTACT_EMAIL + "."), "error");
+      if (button) button.disabled = false;
+      if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
+    }
 
     fetch(endpoint, {
       method: "POST",
@@ -51,24 +59,25 @@
       body: JSON.stringify(payload)
     })
       .then(function (res) {
-        if (!res.ok) throw new Error("Bad response");
-        return res.json();
+        return res.json().catch(function () { return {}; }).then(function (body) {
+          return { status: res.status, body: body };
+        });
       })
-      .then(function (body) {
-        if (!body || !body.ok) throw new Error("Not ok");
-        form.reset();
-        setStatus(
-          "Thank you — your enquiry has been sent, and a copy is on its way to your inbox. We'll be in touch shortly.",
-          "ok"
-        );
-        if (button) button.disabled = false;
+      .then(function (r) {
+        if (r.status === 200 && r.body && r.body.ok) {
+          form.reset();
+          if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
+          setStatus(
+            "Thank you — your enquiry has been sent, and a copy is on its way to your inbox. We'll be in touch shortly.",
+            "ok"
+          );
+          if (button) button.disabled = false;
+        } else {
+          fail(r.body && r.body.error);
+        }
       })
       .catch(function () {
-        setStatus(
-          "Sorry — we couldn't send that just now. Please email us directly at " + CONTACT_EMAIL + ".",
-          "error"
-        );
-        if (button) button.disabled = false;
+        fail();
       });
   });
 })();
