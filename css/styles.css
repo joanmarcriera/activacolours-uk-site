@@ -480,6 +480,7 @@ table.spec td:first-child {
 .form-status:empty { display: none; }
 .form-status.is-ok { color: #1a7f4b; }
 .form-status.is-error { color: #b3261e; }
+.form-status.is-info { color: var(--blue, #1c3f94); }
 
 /* Footer */
 footer {

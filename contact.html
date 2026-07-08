@@ -27,7 +27,7 @@
   <div class="wrap media" style="align-items:start">
     <div>
       <h2>Enquiry</h2>
-      <form id="lead-form" class="lead-form" action="mailto:sales@activacolours.com" method="post" enctype="text/plain" data-endpoint="/api/contact">
+      <form id="lead-form" class="lead-form" action="mailto:sales@activacolours.com" method="post" enctype="text/plain" data-endpoint="https://api.activacolours.com/">
         <div hidden aria-hidden="true"><label for="website">Leave this blank</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
         <div><label for="name">Name *</label><input id="name" name="name" required></div>
         <div><label for="company">Company *</label><input id="company" name="company" required></div>
@@ -51,7 +51,7 @@
         <div><label for="msg">Details</label><textarea id="msg" name="msg" rows="4" placeholder="Products, volumes, project, timing…"></textarea></div>
         <button class="btn" type="submit">Send enquiry</button>
         <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-        <p class="form-note">We use your details only to respond to your enquiry. If your browser cannot reach our server, this opens your email app instead.</p>
+        <p class="form-note">We use your details only to respond to your enquiry, and we'll send a copy to your email.</p>
       </form>
     </div>
     <div>
