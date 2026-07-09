@@ -12,3 +12,6 @@ node_modules/
 coverage/
 .cache/
 dist/
+
+# Local-only raw source extracts (not published to the public marketing site)
+assets/source-extracts/

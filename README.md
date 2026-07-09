@@ -40,12 +40,12 @@ The deployment workflow publishes the repository root as the static site.
 
 ## Launch checklist
 
-- [ ] Confirm whether `hello@activacolours.uk` is the final enquiry address.
-- [ ] Replace the email fallback in `contact.html` with a CRM/form endpoint if a
-      server-side lead capture flow is preferred.
+- [x] Final enquiry address is `sales@activacolours.com` (Cloudflare Email Routing → Gmail).
+- [x] Server-side lead capture live: form POSTs to the Cloudflare Worker (`contact-worker/`),
+      which emails via Resend; `contact.html` keeps a `mailto:` fallback for no-JS visitors.
+- [x] Production domain `activacolours.com` live with HTTPS enforced (apex + www + old path redirect).
 - [ ] Add real company registration, privacy-controller details and terms if
       required before public launch.
-- [ ] Add the production domain and confirm HTTPS.
 - [ ] Run a final compliance read before publishing new marketing copy.
 
 ## Compliance position
